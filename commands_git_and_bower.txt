@@ -1,0 +1,49 @@
+Notes
+
+-> Commandes terminal (mac)
+ls = liste des dossiers
+mkdir = make directory(créer un dossier vide)
+rmdir = remove directory (supprimer dossier vide)
+rm -r = équivalent rmdir + enfants
+cd = change directory (sélection dossier
+npm = node package manager (installations relatives à node)
+-g = global(installation de manière globale pour tous les futurs projets)
+clear = garde en mémoire les commande précédente mais nettoie l'affichage du terminal 
+touch index.html = créer un fichier index.html
+cp index.html ../dossierDest = copie de l'index.html dans un autre dossier frère au dossier parent nommé dossierDest
+cp -r * ../dossierDest = copie des dossiers enfants dans un autre dossier frère au parent
+
+
+récupération d'ancienne commande = flèche vers le haut
+
+bower = logiciel bower, affichage commandes
+npm install -g bower = installation bower
+bower install jquery = installation plugin jquery
+bower list = liste des plugins
+bower update = mise à jour
+
+git init = créer un dépôt dans le dossier sélectionné (crée un dossier masqué .git)
+git status = indique les fichiers suivis par git et qui ne sont pas versionnés
+git add index.html = ajout de fichier index dans le projet git, le fichier est tracké mais par git mais pas enregistré)
+git add nomDeDossier = idem çi dessus mais pour tracker un dossier et sous composants 
+git commit -m insert_index = le fichier tracké, dans ce cas çi index est enregistré dans le dépôt
+git log = affiche tous les commits effectués
+git commit -a -m change_index = ajout des modifications dans le dépôt
+git commit -a -m start = premier dépôt des fichiers enregistrés
+-a = ajouter 
+-m = message
+git diff index.html = permet de voir les modifications de la page index.html
+git checkout index.html = revient à une version antérieure
+git branch = affiche les branches de git
+git branch destination = crée une branche destination
+git checkout destination = se met sur la branche nommée destination
+git merge destination = import de la branche externe destination sur la branche sur laquelle on est positionné
+git rm -rf index.html = supprime le fichier ou dossier ciblé, soit index.html
+-r = repertory (dossier contenant des fichiers)
+-f = forcing (refus de suppression, j'impose ma loi)
+git branch -d destination = détruire la branche destination
+git clone www.github.com = importer un travail hébergé sur github, il restera connecté avec la source hébergée
+git remote -v = donne l'origine des fichiers partagés github
+git push origin master = mise en ligne du dossier partagé github
+
+defaults write com.apple.finder AppleShowAllFiles 1 = afficher fichier et dossiers masqués dans mac

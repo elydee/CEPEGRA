@@ -1,0 +1,13 @@
+-> Plugins
+Packages sublime text : 
+	Alignment
+	AutoFileName
+	Tagify
+	HTMLBeautify
+	Package Control
+	Random everything
+	SCSS
+
+
+lorempixels.com
+placekitten.com 
