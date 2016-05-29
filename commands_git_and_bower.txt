@@ -1,4 +1,96 @@
-Notes
+﻿--Nouvelles notes--
+Commandes générales:
+
+explorer . = ouvre dans le finder le dossier dans lequel le terminal se trouve
+
+Attributs de commandes:
+--global = attribution globale d'un projet (sur toute la machine)
+--list = affiche la liste correspondante à l'action de la commande
+-a = raccourcit correspondant à ajouter
+-m = raccourcit correspondant à message
+-am = compilation de -a et -m
+--all = spécifie tous les éléments présents
+
+Git global:
+git config --list = Affiche la liste des configurations git
+git config --global user.name "Mon nom" = Attribue à la configuration git un nom utilisateur 
+
+Attributs gits:
+user.email = attribue une adresse email aux informations de l'utilisateur 
+user.name = attribue le nom de l'utilisateur 
+add = ajout de fichier au staging (trackage)
+commit = envois des fichiers trackés au dépôt
+
+Projet local:
+git init = initialise git dans le dossier sur lequel on se trouve
+git status = donne l'état du dossier git
+git add readme.md = ajout du fichier readme.md au staging git (trackage des fichiers)
+git add *.html = ajout de tous les fichiers html présents au staging
+git add . = ajoute tous les fichiers 
+git add --all = ajoute tous les fichiers présents et prend en compte les fichiers supprimés, dans le cas d'un fichier supprimé il faut vider ensuite le staging avec "git reset readme.md" si on a supprimé le fichier readme.md ou alors vider le cache des fichiers trackés avec "git reset" qui supprime l'ensemble et refaire le tracking
+git commit = envois les fichiers trackés au dépôt (attention, ouvre un second éditeur appelé vim, appuyer sur [i] pour passer en mode insertion et taper le nom du message de commit, tapez ensuite sur la touche [esc] et entrez le texte :wq pour quitter la commande, la fonction commit est alors lancée)
+git commit -m start = effectue directement le commit avec le message start
+git commit -a -m start = ajout et envois des fichiers trackés avec le message start, -a envois les fichiers de automatiquement
+touch .gitignore = crée un fichier dans lequel on peut spécifier les fichiers et dossier que l'on souhaite que git ignore 
+git log = affiche l'historique des commits
+git log -n2 = affiche les deux derniers commits
+git log --oneline = affiche l'historique des commits sur une seule ligne avec moins d'informations de manière à être plus lisible (id commit + message)
+git log -p readme.md = filtre les commits en fonction du chemin obserbé, ici le fichier enfant readme.md, et affiche l'historique
+git diff = prend tous les fichiers depuis le dernier commit et affiche les modifications
+git checkout start = retourne à l'ancien commit correspondant au nom start (peut aussi récupérer via un id de commit), à ce stade, les données que l'on avait avant le checkout ne sont pas encore perdues, nous sommes actuellement en mode vue. Pour retourner à l'état normal, il faut effectuer -> git checkout master
+git checkout start readme.md = récupère le fichier readme.me correspondant au commit start (ou id spécifié), pour revenir en arrière -> git checkout master readme.md
+git revert start = permet de supprimer ce qui a été produit durant un commit particulier, dans le cas présent celui correspondant au commit start (peut aussi utiliser l'id), envois encore une fois dans la console vim, choisir un nom ou laisser celui par défaut puis sortir avec la touche [esc] suivis de l'entrée ":wq". On peut également annuler un revert en lui appliquant un revert, le revert permet de préserver l'historique
+git reset =(!) supprime tous éléments dans le staging, il n'y a donc plus de fichier tracké
+git reset HEAD readme.md =(!) supprime le fichier du staging, le fichier n'est plus tracké, le HEAD peut être remplacé par le "--"
+git reset --hard =(!!) supprime toutes les sauvegardes, également dans le dépôt, pour revenir au commit précédent manipulation définitive
+git reset start =(!) revient au commit nommé start, il n'a pas touché à l'espace de travail qui comporte des modifications donc la manipulation qui a suivie est préservée, il suffit de refaire un commit pour revenir à l'état précédent
+git reset HEAD^ --soft =(!) revient au commit précédent, le mode soft permet de laisser toutes les modifications qui ont étés faites sur notre espace de travail
+git reset HEAD^ --mixed =(!) revient en arrière, mais laisse les modifications apportées au dépôt, on doit également refaire un staging avec la commande "git add", mixed est l'attribution par défaut
+git reset HEAD^ --hard =(!!) revient en arrière exactement dans le même état que l'on était au commit précédent, supprime l'historique de ce qui a été apporté par la suite
+git branch = affiche toutes les branches existantes
+git branch -r = affiche les branches existantes disponible à distance
+git branch css = crée une branche css
+git branch -a = affiche toutes les branches même celles à distance
+git branch -d css = supprime la branche css
+/-remarque: on peut revenir en arrière avec reset et démarrer une nouvelle branche à partir de ce moment, les données apportées après ce commit sont sauvegardé
+git checkout css = nous positionne sur la branche css
+git merge css = fusionne la branche active avec la branche css
+/-remarque: il se peut qu'il y aie des conflits lors de fusions entre deux fichiers, pour savoir quel est la modification corrigée git nous proposera de la corriger manuellement, il suffira de retirer les commentaires de git et de supprimer ce qui est à retirer
+git commit --amend = enregistre les modifications dans le commit précédent, à ne pas effectuer après des publications mais bien sauvegarder dans un commit récent
+git rebase master =(!) envois les modifications de la branche active sur la branche master, ne pas utiliser après publication
+git rebase -i master =(!) permet la même chose que précédemment mais passe en mode intéractif et ouvre la fenêtre vim, et offre donc la possibilité d'effectuer une action parmis la liste çi-dessous, ne pas utiliser après publication, ne pas utiliser après publication
+git rebase -i HEAD~3 =(!) Recule de 3 commits en arrière pour modifier ces 3 commits en mode intéractif et permet donc de manipuler l'historique, ne pas utiliser après publication
+/-remarque: git rebase propose plusieurs actions à effectuer 
+/pick = le commit est inclus
+/reword = le commit peut être renommé
+/edit = le commit peut être édité (séparé en plusieurs commits si besoin)
+/squash = le commit sera fusionné avec le commit du dessus
+/fixup = comme squash mais le message du commit ne sera pas modifié
+/exec = permet d'exécuter des commandes sell sur le commit
+/Ne pas modifier l'historique après un partage de nos données
+git stash = modifications depuis le dernier commit mise en mémoire et retirée du plan de travail
+git stash save "Ajout du css" = idem précédent mais permet de mettre un titre
+git stash list = affiche le cache du stash et les différentes sauvegardes de données
+git stash show stash@{1} -p = affiche le contenu du strash précisé, ici le premier stash, -p permet d'avoir un détail plus poussé mais est optionnel
+git stash apply = réajoute les données mises en mémoire dans le stash, il faut ensuite vider le cache
+git stash drop = vide le cache du stash
+git stash pop stash@{1} = réapplique les données enregistrées dans le stash 1 et le supprime automatiquement
+git stash branch demo = enregistre les données modidiées dans une nouvelles branche automatiquement créée nommée demo
+/-remarque: les fichiers stashés doivent être trackés, s'il ne le sont pas il suffit de rajouter l'attribut -u et il sera rajouté automatiquement
+git init --bare = initialise le dépôt git, on spécifie que ce dossier servira de dépôt et ne contiendra pas nos dossiers de travail mais bien nos sauvegardes
+git remote add origin D:\maxime\.. = défini le dépôt originel du projet créé, origin est le nom du dépôt, suivis du chemin vers le lieu de dépôt (dossier, ssh ou serveur)
+git remove origin = supprime le dépôt origin
+git remote rename origin base = renomme le dépôt origin en base
+git remote -v = affiche la liste des dépôts
+git push origin master = envois des modifications sur le dépôt distant origin et sur la branche master
+git pull origin master = permet de récupérer les données stockées sur la branche master du dépôt origin
+git clone D:\maxime\.. clonage = permet de cloner les données mises en ligne et les stockes dans le dossier clonage, fonction qui s'utilise lors du premier import d'un projet, on peut choisir le nombre de commit que l'on veut récupérer pour ne pas reprendre tout l'historique, on peut donc choisir la profondeur avec '--depth 1', qui récupèrera donc le dernier commit dans ce cas çi
+git pull --rebase origin master = permet de faire en sorte d'appliquer un rebase sur le dépôt distant et d'éviter les merges des différentes données de deux utilisateurs, l'ajout ne se fera donc pas sur un merge mais il affichera un commit supplémentaire dans la branche de manière à garder l'historique plus propre
+git config --global branch.autosetuprebase always = permet de faire une automatisation du rebase à chaque fois que l'on fera un pull
+ssh-keygen -t rsa -C "maxime-palau@hotmail.com" = créée une clef ssh qui permet de lier l'ordinateur au dépôt en ligne git pour ne pas devoir entrer nos indentifiants à chaques opération
+git commit -a -m "fixes #1, ceci est mon message" = envois un commit correcteur et préçise quel est le fichier corrigé avec l'id correspondant et le message d'explication, il suffit ensuite lui faire un push et la correction sera en ligne
+
+Anciennes notes Notes 
 
 -> Commandes terminal (mac)
 ls = liste des dossiers
