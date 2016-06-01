@@ -1,0 +1,19 @@
+CREATE DATABASE => création d'une base de donnée
+DEFAULT CHARACTER SET utf8 => définit l'encodage utilisé
+DEFAULT COLLATE utf8_general_ci; => défini l'interclassement à utiliser
+DROP DATABASE mydatabase = supprime la base de donnée nommée mydatabase
+USE mydatabase; => cible la base de donnée mydatabase
+CREATE TABLE person (
+	name VARCHAR(255) NOT NULL,
+	firstname VARCHAR(255) NOT NULL,
+	birthdate DATE NOT NULL
+) => crée une table nommée person avec les champs name et firstname de 255 caractères ainsi que le champ de type date birthdate, et aucun de ces champs ne peuvent rester vide
+ENGINE=INNODB => Défini le moteur innodb
+SHOW CREATE TABLE person => affiche la commande mysql pour créer une table sur le modèle de la table person existante
+ALTER TABLE person ADD country VARCHAR(60) NOT NULL => permet de modifier la table person et de lui ajouter le champs country, avec 60 caractères et le champs est obligatoire
+CHANGE mybirthdayz birthday DATE NOT NULL => change le champs mybirthdayz de type date pour le renommer en birthday cibler la table auparavant
+MODIFY birthday DATETIME NULL => change le type du champs birthday en datetime optionnel
+INSERT INTO person VALUES (NULL, 'Palau', 'Maxime', 1993/04/01), (NULL, 'Etienne', 'Nicolas', 1987/06/13);
+=> insère les données dans la table person avec l'id en null, le nom, prénom et la date de naissance, et insère également une seconde ligne avec une seconde personne, chaque commande se fini par un point virgule
+INSERT INTO person  (name, firstname) VALUES ('Palau', 'Maxime');
+=> Insère uniquement les champs correspondants à name et firstname
