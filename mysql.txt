@@ -1,4 +1,4 @@
-CREATE DATABASE => crÈation d'une base de donnÈe
+CREATE DATABASE => création d'une base de donnée
 DEFAULT CHARACTER SET utf8 => dÈfinit l'encodage utilisÈ
 DEFAULT COLLATE utf8_general_ci; => dÈfini l'interclassement ‡ utiliser
 DROP DATABASE mydatabase = supprime la base de donnÈe nommÈe mydatabase
@@ -7,13 +7,20 @@ CREATE TABLE person (
 	name VARCHAR(255) NOT NULL,
 	firstname VARCHAR(255) NOT NULL,
 	birthdate DATE NOT NULL
-) => crÈe une table nommÈe person avec les champs name et firstname de 255 caractËres ainsi que le champ de type date birthdate, et aucun de ces champs ne peuvent rester vide
+) => crÈe une table nommée person avec les champs name et firstname de 255 caractËres ainsi que le champ de type date birthdate, et aucun de ces champs ne peuvent rester vide
 ENGINE=INNODB => DÈfini le moteur innodb
 SHOW CREATE TABLE person => affiche la commande mysql pour crÈer une table sur le modËle de la table person existante
 ALTER TABLE person ADD country VARCHAR(60) NOT NULL => permet de modifier la table person et de lui ajouter le champs country, avec 60 caractËres et le champs est obligatoire
 CHANGE mybirthdayz birthday DATE NOT NULL => change le champs mybirthdayz de type date pour le renommer en birthday cibler la table auparavant
 MODIFY birthday DATETIME NULL => change le type du champs birthday en datetime optionnel
 INSERT INTO person VALUES (NULL, 'Palau', 'Maxime', 1993/04/01), (NULL, 'Etienne', 'Nicolas', 1987/06/13);
-=> insËre les donnÈes dans la table person avec l'id en null, le nom, prÈnom et la date de naissance, et insËre Ègalement une seconde ligne avec une seconde personne, chaque commande se fini par un point virgule
+=> insère les données dans la table person avec l'id en null, le nom, prÈnom et la date de naissance, et insËre Ègalement une seconde ligne avec une seconde personne, chaque commande se fini par un point virgule
 INSERT INTO person  (name, firstname) VALUES ('Palau', 'Maxime');
-=> InsËre uniquement les champs correspondants ‡ name et firstname
+=> Insère uniquement les champs correspondants ‡ name et firstname
+DELETE FROM person WHERE id_perso=6 LIMIT 1 => Supprime la ligne contenant l’id 6 dans le tableau person
+TRUNCATE FROM person = réinitialise le tableau, clefs primaire comprises
+UPDATE person SET kind=‘m’ WHERE kind=‘f’ = Mise à jour de la table person, changer le genre en masculin pour les personnes en genre féminin
+SELECT SUM (quantity*price) WHERE sales => Retourne les valeur des opérations effectuées, soit la multiplication de la quantité x le prix pour les éléments dans la table des ventes
+SELECT MAX(price) FROM sales => Sélectionne le prix maximum dans la catégorie ventes
+SELECT SUM(salary)/COUNT(salary) FROM person => comptabilise les salaire et divise par le nombre de salarié pour obtenir une moyenne salariale
+SELECT AVG(salary) FROM person = idem ci dessus avec la fonction appropriée
