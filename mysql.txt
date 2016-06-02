@@ -24,3 +24,6 @@ SELECT SUM (quantity*price) WHERE sales => Retourne les valeur des oprations ef
 SELECT MAX(price) FROM sales => Slectionne le prix maximum dans la catgorie ventes
 SELECT SUM(salary)/COUNT(salary) FROM person => comptabilise les salaire et divise par le nombre de salari pour obtenir une moyenne salariale
 SELECT AVG(salary) FROM person = idem ci dessus avec la fonction approprie
+DATE_FORMAT(date, Ô%d, %m, %yÕ) => fonction qui permet de modifier lÕaffichage du format de la date
+DISTINCT => Permet de ne pas rpter les lments qui se rptent, ˆ placer dans le select
+TRIM() => fonction qui permet dÕliminer les espaces avant et arrire

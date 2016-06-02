@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- xmlns est un namespace qui permet de mettre en place des espaces de noms, qui sont rappelés dans le document xml ci dessous -->
+<!DOCTYPE root [
+	<!ELEMENT root (institutes:library, mylibrary, text)>
+	<!ELEMENT institutes:library (name, address, copyright)> 
+	<!ELEMENT mylibrary EMPTY> 
+	<!ELEMENT text (#PCDATA)> 
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT address (number?, street, zip, city+)>
+	<!ELEMENT copyright (#PCDATA)>
+	<!ELEMENT street (#PCDATA)>
+	<!ELEMENT zip (#PCDATA)>
+	<!ELEMENT city (#PCDATA)>
+	<!ATTLIST mylibrary
+		id ID #IMPLIED
+		name CDATA #REQUIRED
+		street CDATA #REQUIRED
+		zip CDATA #IMPLIED
+		city CDATA #REQUIRED
+	>
+	<!ENTITY cepegra "Cepegra, centre de compétence">
+]>
+<!-- déclaration du type de document contenant root comme élément équivalent à html, pour déclarer des balises enfants on met le nom des balises séparées d'une virgule, pour déclarer une balise autofermante on utilise EMPTY sans parenthèses, pour le contenu texte on utilise #PCDATA, balise? veut dire qu'il est possible que cet balise ne se retrouve pas à cet emplacement ou n'existe pas, balise+ veut dire qu'elle contiendra au moins une fois cet élément, pour les attributs on utilise ATTLIST avec le nom de l'élément puis le nom de l'attribut, avec la spécification CDATA pour lui dire qu'on inclut du texte ou ID s'il s'agit d'un type identifiant (et donc un seul par page) et #REQUIRED ou #IMPLIED pour requis ou non, ENTITY est l'équivalent d'une variable xml qui permet de faire un appel à du contenu, ici dans la base copyright -->
+<!-- entête xml -->
+<root xmlns:institutes="http://localhost/phpmyadmin">
+	<!-- first syntax -->
+	<institutes:library>
+		<name>Bibliothèque du Cepegra</name>
+		<address>
+			<street>Av. G. Lemaître 22</street>
+			<zip>6041</zip>
+			<city>Gosselies</city>
+		</address>
+		<copyright>&cepegra;</copyright>
+	</institutes:library>
+	<!-- second syntax -->
+	<mylibrary name="Bibliothèque du Cepegra" street="Av. G. Lemaître 22" zip="6041" city="Gosselies"/>
+	<!-- première partie plus longue mais plus flexible et standardisée, deuxième plus courte et légère mais plus difficile d'accès  -->
+
+	<text>
+		<![CDATA[Lorem ipsum <strong>dolor</strong> sit amet, consectetur adipisicing elit. Velit provident aliquam modi aspernatur vero quidem rem, vel necessitatibus dicta nihil perspiciatis ducimus quas iusto facilis consectetur voluptates reprehenderit sed corporis.]]>
+		<!-- CDATA permet de dire à l'élément que tout ce qu'il contient doit être traité comme du texte, y compris les balises -->
+	</text>
+</root>

@@ -1,0 +1,25 @@
+Database
+
+relation objet (ex ville):
+1 ville peut avoir 1pays mais 1 pays peut avoir plusieurs villes, relation de 1 à 1 vers pays et 1 à ∞ vers ville
+
+identifiant: unique, immuable, disponible
+
+unique = deux personnes n'ont pas le même, il n'existe qu'une fois
+immuable = il ne changera pas, il restera a jamais assigné à la même personne
+disponible = l'information est connue et peut le fournir en permanence
+
+Eviter les répétitions, préserver l'intégrité relationnel des objets (faire en sorte qu'il n'y ai pas de contradiction dans les relations et que chaque clefs se rapporte à un element, son on appel l’id n°3, il doit exister)
+
+Les relations de plusieurs à plusieurs amènent des tables dédiées aux relations entre les deux objets
+
+Si les deux objets peuvent être communs, on fusionne les deux objets en un seul tableau, ex: 
+un père peut être un enfant et un enfant peut être père, donc si on veut savoir qui est le père d'une personne on se réfère à l'id père de cette personne qui contient l'identifiant de la personne correspondante
+
+interclassement base de donnée : préférer utf8_general_ci
+
+Dans un schémas, on ne peut jamais avoir de boucle au niveau du schémas objet, si boucle elles se feront au schémas table
+
+Dans une relation de 1 à plusieurs, c’est l’id de la catégorie 1 qui vient dans la catégorie plusieurs, et vice versa. Les ids seront toujours du côté plusieurs
+
+Une boucle dans une table est le résultat d’une fusion d’objet, sans ça il ne doit pas y avoir de boucle dans les tables
