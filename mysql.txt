@@ -1,4 +1,21 @@
-CREATE DATABASE => crŽation d'une base de donnŽe
+Fonctions:
+CREATE => crée...
+SELECT => sélectionne et affiche...
+INSERT INTO => insère dans...
+UPDATE => met à jour... (données)
+MODIFY => modifie... (type/options)
+DELETE FROM => supprime les données dans...
+
+Actions:
+SET => applique...
+
+Conditions, cible:
+WHERE => à l'endroit où...
+
+Organisations:
+ORDER BY => organise les éléments dans l'ordre...
+
+CREATE DATABASE => création d'une base de donnée
 DEFAULT CHARACTER SET utf8 => définit l'encodage utilisé
 DEFAULT COLLATE utf8_general_ci; => défini l'interclassement à utiliser
 DROP DATABASE mydatabase = supprime la base de donnée nommée mydatabase
@@ -7,23 +24,20 @@ CREATE TABLE person (
 	name VARCHAR(255) NOT NULL,
 	firstname VARCHAR(255) NOT NULL,
 	birthdate DATE NOT NULL
-) => crée une table nommŽe person avec les champs name et firstname de 255 caractères ainsi que le champ de type date birthdate, et aucun de ces champs ne peuvent rester vide
+) => crée une table nommée person avec les champs name et firstname de 255 caractères ainsi que le champ de type date birthdate, et aucun de ces champs ne peuvent rester vide
 ENGINE=INNODB => Défini le moteur innodb
 SHOW CREATE TABLE person => affiche la commande mysql pour créer une table sur le modèle de la table person existante
 ALTER TABLE person ADD country VARCHAR(60) NOT NULL => permet de modifier la table person et de lui ajouter le champs country, avec 60 caractères et le champs est obligatoire
 CHANGE mybirthdayz birthday DATE NOT NULL => change le champs mybirthdayz de type date pour le renommer en birthday cibler la table auparavant
 MODIFY birthday DATETIME NULL => change le type du champs birthday en datetime optionnel
 INSERT INTO person VALUES (NULL, 'Palau', 'Maxime', 1993/04/01), (NULL, 'Etienne', 'Nicolas', 1987/06/13);
-=> insre les donnŽes dans la table person avec l'id en null, le nom, prénom et la date de naissance, et insère également une seconde ligne avec une seconde personne, chaque commande se fini par un point virgule
-INSERT INTO person  (name, firstname) VALUES ('Palau', 'Maxime');
-=> Insre uniquement les champs correspondants à name et firstname
-DELETE FROM person WHERE id_perso=6 LIMIT 1 => Supprime la ligne contenant lÕid 6 dans le tableau person
-TRUNCATE FROM person = rŽinitialise le tableau, clefs primaire comprises
-UPDATE person SET kind=ÔmÕ WHERE kind=ÔfÕ = Mise ˆ jour de la table person, changer le genre en masculin pour les personnes en genre fŽminin
-SELECT SUM (quantity*price) WHERE sales => Retourne les valeur des opŽrations effectuŽes, soit la multiplication de la quantitŽ x le prix pour les ŽlŽments dans la table des ventes
-SELECT MAX(price) FROM sales => SŽlectionne le prix maximum dans la catŽgorie ventes
-SELECT SUM(salary)/COUNT(salary) FROM person => comptabilise les salaire et divise par le nombre de salariŽ pour obtenir une moyenne salariale
-SELECT AVG(salary) FROM person = idem ci dessus avec la fonction appropriŽe
-DATE_FORMAT(date, Ô%d, %m, %yÕ) => fonction qui permet de modifier lÕaffichage du format de la date
-DISTINCT => Permet de ne pas rŽpŽter les ŽlŽments qui se rŽptent, ˆ placer dans le select
-TRIM() => fonction qui permet dÕŽliminer les espaces avant et arrire
+=> insère les données dans la table person avec l'id en null, le nom, prénom et la date de naissance, et insère également une seconde ligne avec une seconde personne, chaque commande se fini par un point virgule
+INSERT INTO person (name, firstname) VALUES ('Palau', 'Maxime');
+=> Insère uniquement les champs correspondants à name et firstname
+INSERT INTO person SET name='Palau', firstname='Maxime' => Idem ci dessous, syntaxe alternative propre à mysql
+DELETE FROM person => supprime toutes les données dans le tableau person
+DELETE FROM person WHERE firstname='Maxime' LIMIT 3 => supprime tous les Maxime dans le tableau person sur les 3 premières lignes, dans le cas où l'on veut supprimer une seule ligne, une sécurité vise à mettre un LIMIT 1
+UPDATE person SET firstname='Maxence' WHERE id=1 LIMIT 1 => met à jour le nom de la personne en identifiant 1 avec une sécurité de 1 ligne à modifier, where est une condition qui me dit "à l'endroit ou l'identifiant correspond à 1"
+TRUNCATE TABLE person = vide complètement la table person en réinitialisant également les clefs primaire
+ORDER BY ASC => organise les éléments de manière ascendante soit alphabétique (DESC pour l'inverse)
+ORDER BY name ASC => organise les éléments de manière ascendante en fonction des valeurs du champ name
